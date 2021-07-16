@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import IconMaximize from "../../assets/icons/ic_maximize.png";
@@ -51,9 +51,11 @@ const WindowProppertyWrapper = styled.div`
 `
 
 const WindowName = styled.span`
-    color:#DBE4EB;
-    font-size:2vh;
-    margin-left:1vh;
+    ${props => `
+        color:#DBE4EB;
+        font-size:${2 * props.sizeMultiplier}vh;
+        margin-left:1vh;
+    `}
 `
 
 const WindowImg = styled.img`
@@ -105,6 +107,7 @@ const MaximizeButton = styled.div`
 `
 
 function Window(props) {
+    const [config, setConfiguration] = useState(JSON.parse(localStorage.getItem("configuration")))
     const [positionX, setPositionX] = useState(5);
     const [positionY, setPositionY] = useState(50); 
     const [downPosX, setDownPosX] = useState(null);
@@ -113,6 +116,23 @@ function Window(props) {
     const [screenSize, setScreenSize] = useState({width: 40, height: 70})
     const [maximized, setMaximized] = useState(false);
     let App = props.app;
+
+    useEffect(() => {
+        let newConfig;
+        if(!config) {
+            newConfig = {
+                sizeMultiplier: 1,
+                fontFamily: "",
+                background: "",
+                theme: "",
+            }
+
+            localStorage.setItem("configuration", JSON.stringify(newConfig));
+            setConfiguration(newConfig)
+        }
+
+        
+    }, [config]);
 
     const setWindowPosition = (e) => {
         if(isHold) {

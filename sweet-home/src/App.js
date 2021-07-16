@@ -31,7 +31,6 @@ const Navigation = styled.div`
 `
 
 function App() {
-  
   const [activeApps, setActiveApps] = useState([])
 
   const closeApp = (name) => {

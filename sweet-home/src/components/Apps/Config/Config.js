@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import IconSave from "../../../assets/icons/ic_save.png";
@@ -36,8 +36,8 @@ const ConfigRow = styled.div`
 
 const TitleConfig = styled.span`
     ${props =>`
-        width:20%;
-        font-size:2vh;
+        width:40%;
+        font-size:${2 * props.sizeMultiplier}vh;
         ${props.styles}
     `}
 `
@@ -48,7 +48,7 @@ const InputConfig = styled.input`
         border-radius:0.5vh;
         border:0.1vh solid lightgray;
         height: 4vh;
-        font-size: 2.5vh;
+        font-size: ${2.5 * props.sizeMultiplier}vh;
         text-align: right;
         padding-right: 2vh;
         margin-left: 8vh;
@@ -58,20 +58,23 @@ const InputConfig = styled.input`
 `
 
 const SaveButton = styled.button`
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    width: 26vh;
-    height: 6vh;
-    font-size: 2vh;
-    cursor:pointer;
-    background-color: #EDF7FF;
-    border: 0.1vh solid lightgray;
-    border-radius: 0.5vh;
-    transition: background-color 0.2s ease-in-out;
-    &:hover{
-        background-color:rgb(38, 224, 127);
-    }
+    ${props => `
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        width: 26vh;
+        height: 6vh;
+        font-size: ${2 * props.sizeMultiplier}vh;
+        cursor:pointer;
+        background-color: #EDF7FF;
+        border: 0.1vh solid lightgray;
+        border-radius: 0.5vh;
+        transition: background-color 0.2s ease-in-out;
+        &:hover{
+            background-color:rgb(38, 224, 127);
+        }
+    `}
+
 `
 
 const IconImage = styled.img`
@@ -79,31 +82,44 @@ const IconImage = styled.img`
 `
 
 function Config(props) {
+    let config = JSON.parse(localStorage.getItem("configuration"));
+    const [sizeMultiplier, setSizeMultiplier] = useState(config.sizeMultiplier);
 
     const saveConfig = () => {
-
+        if(!config) {
+            config = {
+                sizeMultiplier: 1,
+                fontFamily: "",
+                background: "",
+                theme: "",
+            }
+        } else 
+            config.sizeMultiplier = sizeMultiplier;
+        
+        console.log(config, sizeMultiplier, "request_config");
+        localStorage.setItem("configuration", JSON.stringify(config));
     }
 
     return (
         <Wrapper>
             <AppContent>
                 <ConfigRow>
-                    <TitleConfig>Tamaño de la letra: </TitleConfig>
-                    <InputConfig type={"text"} />
+                    <TitleConfig sizeMultiplier={config.sizeMultiplier}>Tamaño de la letra: </TitleConfig>
+                    <InputConfig sizeMultiplier={config.sizeMultiplier} type={"text"} value={sizeMultiplier} onChange={(e) => setSizeMultiplier(e.currentTarget.value)}/>
                 </ConfigRow>
                 <ConfigRow>
-                    <TitleConfig>Fuente de la página: </TitleConfig>
-                    <InputConfig styles={"background-color:#DBE4EB"} readOnly type={"text"} value={"Próximamente..."}/>
+                    <TitleConfig sizeMultiplier={config.sizeMultiplier} >Fuente de la página: </TitleConfig>
+                    <InputConfig sizeMultiplier={config.sizeMultiplier} styles={"background-color:#DBE4EB"} readOnly type={"text"} value={"Próximamente..."}/>
                 </ConfigRow>
                 <ConfigRow>
-                    <TitleConfig>Temas: </TitleConfig>
-                    <InputConfig styles={"background-color:#DBE4EB"} readOnly type={"text"} value={"Próximamente..."}/>
+                    <TitleConfig sizeMultiplier={config.sizeMultiplier}>Temas: </TitleConfig>
+                    <InputConfig sizeMultiplier={config.sizeMultiplier} styles={"background-color:#DBE4EB"} readOnly type={"text"} value={"Próximamente..."}/>
                 </ConfigRow>
                 <ConfigRow>
-                    <TitleConfig>Fondo de pantalla: </TitleConfig>
-                    <InputConfig styles={"background-color:#DBE4EB"} readOnly type={"text"} value={"Próximamente..."}/>
+                    <TitleConfig sizeMultiplier={config.sizeMultiplier}>Fondo de pantalla: </TitleConfig>
+                    <InputConfig sizeMultiplier={config.sizeMultiplier} styles={"background-color:#DBE4EB"} readOnly type={"text"} value={"Próximamente..."}/>
                 </ConfigRow>
-                <SaveButton onClick={saveConfig}> Guardar configuración <IconImage src={IconSave} alt={"Save config"}/></SaveButton>
+                <SaveButton sizeMultiplier={config.sizeMultiplier} onClick={saveConfig}> Guardar configuración <IconImage src={IconSave} alt={"Save config"}/></SaveButton>
             </AppContent>
         </Wrapper>
     );
