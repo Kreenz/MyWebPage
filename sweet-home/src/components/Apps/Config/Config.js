@@ -108,6 +108,10 @@ function Config(props) {
                     <InputConfig sizeMultiplier={config.sizeMultiplier} type={"text"} value={sizeMultiplier} onChange={(e) => setSizeMultiplier(e.currentTarget.value)}/>
                 </ConfigRow>
                 <ConfigRow>
+                    <TitleConfig sizeMultiplier={config.sizeMultiplier}>Idioma: </TitleConfig>
+                    <InputConfig sizeMultiplier={config.sizeMultiplier} styles={"background-color:#DBE4EB"} readOnly type={"text"} value={"Próximamente..."}/>
+                </ConfigRow>
+                <ConfigRow>
                     <TitleConfig sizeMultiplier={config.sizeMultiplier} >Fuente de la página: </TitleConfig>
                     <InputConfig sizeMultiplier={config.sizeMultiplier} styles={"background-color:#DBE4EB"} readOnly type={"text"} value={"Próximamente..."}/>
                 </ConfigRow>

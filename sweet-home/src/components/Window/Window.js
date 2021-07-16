@@ -37,10 +37,15 @@ const WindowBar = styled.div`
 `
 
 const WindowContent = styled.div`
-    box-sizing: border-box;
-    width:100%;
-    height:100%;
-    border: 0.1vh solid #222;
+    ${props =>`
+        box-sizing: border-box;
+        width:100%;
+        height:100%;
+        border: 0.1vh solid #222;
+        max-height: ${props.maxHeightSize}vh;
+        overscroll-y:auto;
+    `}
+
 `
 
 const WindowProppertyWrapper = styled.div`
@@ -114,6 +119,7 @@ function Window(props) {
     const [downPosY, setDownPosY] = useState(null);
     const [isHold, setHold] = useState(false)
     const [screenSize, setScreenSize] = useState({width: 40, height: 70})
+    const [maxHeightSize, setMaxHeightSize] = useState(66)
     const [maximized, setMaximized] = useState(false);
     let App = props.app;
 
@@ -178,13 +184,15 @@ function Window(props) {
             size.width = 99.5;
             size.height = 94;
             setScreenSize(size);
+            setMaxHeightSize(90);
             setMaximized(true)
         } else {
             let size = screenSize;
             size.width = 40;
             size.height = 70;
             setScreenSize(size);
-            setMaximized(false)
+            setMaxHeightSize(66);
+            setMaximized(false);
         }
     }
 
@@ -208,7 +216,7 @@ function Window(props) {
                     <CloseButton onClick={() => props.closeApp(App.name)}/>
                 </ButtonWrappers>
             </WindowBar>
-            <WindowContent>
+            <WindowContent maxHeightSize={maxHeightSize}>
                 {App.component}
             </WindowContent>
         </Wrapper>
