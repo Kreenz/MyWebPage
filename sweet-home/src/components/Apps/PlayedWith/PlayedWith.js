@@ -11,6 +11,7 @@ const AppContent = styled.div`
     flex-direction:row;
     width:100%;
     height:100%;
+    background-color:white;
 `
 
 const SectionContent = styled.div`

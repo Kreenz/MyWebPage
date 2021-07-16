@@ -4,6 +4,7 @@ import styled from "styled-components";
 import IconMaximize from "../../assets/icons/ic_maximize.png";
 import IconClose from "../../assets/icons/ic_close_white.png";
 import IconMinimze from "../../assets/icons/ic_minimze.png";
+import IconLoading from "../../assets/icons/ic_loading.gif";
 
 import IconMaximizeSel from "../../assets/icons/ic_maximize_blue.png";
 import IconCloseSel from "../../assets/icons/ic_close_red.png";
@@ -44,6 +45,9 @@ const WindowContent = styled.div`
         border: 0.1vh solid #222;
         max-height: ${props.maxHeightSize}vh;
         overscroll-y:auto;
+        background: url(${IconLoading}) no-repeat center;
+        background-size: 6vh auto;
+        background-color:white;
     `}
 
 `

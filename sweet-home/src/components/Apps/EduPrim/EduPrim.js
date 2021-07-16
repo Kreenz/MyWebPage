@@ -2,8 +2,9 @@ import React from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-  width:100%;
-  height:100%;
+    width:100%;
+    height:100%;
+    max-width:100%;
 `
 
 const AppFrame = styled.iframe`
@@ -12,13 +13,13 @@ const AppFrame = styled.iframe`
   border:none;
 `
 
-function LoveConnect(props) {
+function EduPrim(props) {
 
   return (
     <Wrapper>
-      <AppFrame src={"https://love-connect-nu.vercel.app/"} />
+        <AppFrame />
     </Wrapper>
   );
 }
 
-export default LoveConnect;
+export default EduPrim;
