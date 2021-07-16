@@ -187,7 +187,7 @@ function Window(props) {
     }
 
     const minimzeWindow = () => {
-        //if(display === "flex") setDisplay("none");
+        if(display === "flex") setDisplay("none");
     }
 
     useEffect(() => {
@@ -208,7 +208,15 @@ function Window(props) {
     }, [config]);
 
     return (
-        <Wrapper zIndex={props.front ? 1 : 0} display={display} posY={positionY} posX={positionX} width={screenSize.width} height={screenSize.height} onClick={() => props.setMainWindow(App.name)}>
+        <Wrapper 
+            zIndex={props.front ? 1 : 0} 
+            display={display} 
+            posY={positionY} 
+            posX={positionX} 
+            width={screenSize.width} 
+            height={screenSize.height} 
+            onClick={() => props.setMainWindow(App.name)}
+            onDoubleClick={maximizeWindow}>
             <WindowBar onMouseUp={isUp} onMouseDown={(e) => isDown(e)} onMouseMove={(e) => setWindowPosition(e)}>
                 <WindowProppertyWrapper>
                     <WindowImg src={App.icon} />
