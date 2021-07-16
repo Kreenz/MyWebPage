@@ -32,6 +32,7 @@ const Navigation = styled.div`
 
 function App() {
   const [activeApps, setActiveApps] = useState([])
+  const [mainWindow, setMainWindow] = useState("");
 
   const closeApp = (name) => {
     let oldApps = [];
@@ -58,6 +59,7 @@ function App() {
         <ExecuteApp 
           isActive={isActive}
           app={app} 
+          setMainWindow={setMainWindow}
           activeApps={activeApps}
           setActiveApps={setActiveApps}
           />
@@ -74,6 +76,8 @@ function App() {
       views.push(
         <Window 
           app={activeApp}
+          front={mainWindow === activeApp.name}
+          setMainWindow={setMainWindow}
           closeApp={closeApp}/>
         )
     })

@@ -23,56 +23,41 @@ const myApps = [
         name:"Zombies",
         icon:IconZombie,
         component: <ZombieApp />,
-        index: 0,
-        display: "flex"
     },
     {
         name: "LoveConnect",
         icon: IconLoveConnect,
         component: <LoveConnectApp />,
-        index: 0,
-        display: "flex"
     },
     {
         name: "EduPrim",
         icon: IconEduPrim,
         component: <EduPrimApp />,
-        display: "flex",
     },
     {
         name: "Factory IDLE",
         icon: IconIDLE,
         component: <FactoryIDLEApp />,
-        index: 0,
-        display: "flex"
     },
     {
         name: "Picolo Pomdoro",
         icon: IconPomodoro,
         component: <PicoloPomodoroApp />,
-        index: 0,
-        display: "flex"
     },
     {
         name: "Experimental",
         icon: IconLaboratory,
         component: <PlayedWithApp />,
-        index: 0,
-        display: "flex"
     },
     {
         name:"About me",
         icon:IconInfo,
         component: <AboutMeApp />,
-        index: 0,
-        display: "flex"
     },
     {
         name:"Configuration",
         icon:IconConfig,
         component: <ConfigApp />,
-        index: 0,
-        display: "flex"
     }
 ]
 

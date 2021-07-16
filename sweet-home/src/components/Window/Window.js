@@ -125,24 +125,8 @@ function Window(props) {
     const [screenSize, setScreenSize] = useState({width: 40, height: 70})
     const [maxHeightSize, setMaxHeightSize] = useState(66)
     const [maximized, setMaximized] = useState(false);
-    let App = props.app;
-
-    useEffect(() => {
-        let newConfig;
-        if(!config) {
-            newConfig = {
-                sizeMultiplier: 1,
-                fontFamily: "",
-                background: "",
-                theme: "",
-            }
-
-            localStorage.setItem("configuration", JSON.stringify(newConfig));
-            setConfiguration(newConfig)
-        }
-
-        
-    }, [config]);
+    const [display, setDisplay] = useState("flex");
+    const App = props.app;
 
     const setWindowPosition = (e) => {
         if(isHold) {
@@ -173,6 +157,8 @@ function Window(props) {
         let y = e.clientY;
         let x = e.clientX;
 
+        props.setMainWindow(App.name)
+
         setDownPosX(x);
         setDownPosY(y);
 
@@ -201,13 +187,28 @@ function Window(props) {
     }
 
     const minimzeWindow = () => {
-        if(App.display === "flex")
-            App.display = "none";
-        else App.display = "flex";
+        //if(display === "flex") setDisplay("none");
     }
 
+    useEffect(() => {
+        let newConfig;
+        if(!config) {
+            newConfig = {
+                sizeMultiplier: 1,
+                fontFamily: "",
+                background: "",
+                theme: "",
+            }
+
+            localStorage.setItem("configuration", JSON.stringify(newConfig));
+            setConfiguration(newConfig)
+        }
+
+        
+    }, [config]);
+
     return (
-        <Wrapper zIndex={App.index} display={App.display} posY={positionY} posX={positionX} width={screenSize.width} height={screenSize.height}>
+        <Wrapper zIndex={props.front ? 1 : 0} display={display} posY={positionY} posX={positionX} width={screenSize.width} height={screenSize.height} onClick={() => props.setMainWindow(App.name)}>
             <WindowBar onMouseUp={isUp} onMouseDown={(e) => isDown(e)} onMouseMove={(e) => setWindowPosition(e)}>
                 <WindowProppertyWrapper>
                     <WindowImg src={App.icon} />

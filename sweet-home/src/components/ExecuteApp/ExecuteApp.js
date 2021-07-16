@@ -30,7 +30,8 @@ function ExecuteApp(props) {
     }
 
     const loadApp = () => {
-        if(!appExists(App.name)) props.setActiveApps(oldApps => [...oldApps, App])
+        if(!appExists(App.name)) props.setActiveApps(oldApps => [...oldApps, App]);
+        props.setMainWindow(App.name);
     }
 
     return (
